@@ -7,20 +7,20 @@ type Factory interface {
 }
 
 type Shape interface {
-	draw()
+	Draw()
 }
 
 type Rectangle struct {
 }
 
-func (s Rectangle) draw() {
+func (s *Rectangle) Draw() {
 	fmt.Print("draw Rectangle!")
 }
 
 type Square struct {
 }
 
-func (s Square) draw() {
+func (s *Square) Draw() {
 	fmt.Println("draw Square!")
 }
 
@@ -34,9 +34,9 @@ func (s *ShapeFactory) GetShape(shapeType string) (Shape, bool) {
 
 	switch shapeType {
 	case "Rectangle":
-		return Rectangle{}, true
+		return new(Rectangle), true
 	case "Square":
-		return Square{}, true
+		return new(Square), true
 	default:
 		return nil, false
 	}
