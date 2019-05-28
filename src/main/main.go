@@ -1,13 +1,14 @@
 package main
 
 import (
+	"BuilderPattern"
 	"FactoryPattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	testSingleton()
+	testBuilderPattern()
 }
 
 func testSimplenessFactory() {
@@ -33,4 +34,11 @@ func testSingleton() {
 	fmt.Println(s1)
 	s2 := SingletonPattern.GetInstance1()
 	fmt.Println(s2)
+}
+
+func testBuilderPattern() {
+	builder := new(BuilderPattern.ComputerBuilder)
+	director := BuilderPattern.Director {Builder: builder}
+	computer := director.Create("I7", "32G", "4T")
+	fmt.Println(*computer)
 }
