@@ -1,10 +1,6 @@
-package SimplenessFactoryPattern
+package FactoryPattern
 
 import "fmt"
-
-type Factory interface {
-	GetShape(shapeType string) (Shape, bool)
-}
 
 type Shape interface {
 	Draw()
@@ -24,10 +20,10 @@ func (s *Square) Draw() {
 	fmt.Println("draw Square!")
 }
 
-type ShapeFactory struct {
+type SimplenessFactory struct {
 }
 
-func (s *ShapeFactory) GetShape(shapeType string) (Shape, bool) {
+func (s *SimplenessFactory) GetShape(shapeType string) (Shape, bool) {
 	if shapeType == "" {
 		return nil, false
 	}
