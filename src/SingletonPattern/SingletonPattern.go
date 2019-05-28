@@ -1,7 +1,6 @@
 package SingletonPattern
 
 import (
-	"fmt"
 	"sync"
 )
 
@@ -11,10 +10,9 @@ type SingleObject struct {
 
 var singleObj *SingleObject
 
-func (p *SingleObject) Singleton() {
-	fmt.Println("Singleton...")
-}
-
+/**
+懒汉
+*/
 func GetInstance1() *SingleObject {
 	if singleObj == nil {
 		singleObj = new(SingleObject)
@@ -22,9 +20,22 @@ func GetInstance1() *SingleObject {
 	return singleObj
 }
 
-var lock *sync.Mutex = &sync.Mutex{}
+/**
+饿汉
+ */
+func init() {
+	singleObj = new(SingleObject)
+}
 
 func GetInstance2() *SingleObject {
+	return singleObj
+}
+
+/**
+双锁
+*/
+var lock *sync.Mutex = &sync.Mutex{}
+func GetInstance3() *SingleObject {
 	lock.Lock()
 	defer lock.Unlock()
 	if singleObj == nil {
@@ -33,7 +44,10 @@ func GetInstance2() *SingleObject {
 	return singleObj
 }
 
-func GetInstance3() *SingleObject {
+/**
+双锁进阶 还可使用原子load以及赋值
+ */
+func GetInstance4() *SingleObject {
 	if singleObj == nil {
 		lock.Lock()
 		defer lock.Unlock()
@@ -41,3 +55,5 @@ func GetInstance3() *SingleObject {
 	}
 	return singleObj
 }
+
+
