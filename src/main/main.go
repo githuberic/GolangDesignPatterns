@@ -3,12 +3,13 @@ package main
 import (
 	"BuilderPattern"
 	"FactoryPattern"
+	"PrototypePattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	testBuilderPattern()
+	PrototypePattern.ComputerStart4()
 }
 
 func testSimplenessFactory() {
