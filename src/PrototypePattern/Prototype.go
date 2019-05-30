@@ -1,40 +1,55 @@
 package PrototypePattern
 
-import "fmt"
+import (
+	"bytes"
+	"encoding/gob"
+)
 
-type PersonalInfo struct {
-	name string
-	sex  string
-	age  string
+//速度速值
+type Speed int
+
+//风扇转速
+type FanSpeed struct {
+	Speed Speed
 }
 
-type WorkExperience struct {
-	timeArea string
-	company  string
+//售价
+type Money struct {
+	Length float64
 }
 
-type Resume struct {
-	PersonalInfo
-	WorkExperience
+//内存数量以及大小
+type Memory struct {
+	Count      int
+	MemorySize []int
 }
 
-func (s *Resume) SetPersonalInfo(name string, sex string, age string) {
-	s.name = name
-	s.sex = sex
-	s.age = age
+//电脑信息
+type Computer struct {
+	SystemName string              //系统名字
+	UseNumber  int                 //使用次数
+	Memory     Memory              //存储
+	Fan        map[string]FanSpeed //风扇
+	Money      Money               //售价
 }
 
-func (s *Resume) SetWorkExperience(timeArea string, company string) {
-	s.timeArea = timeArea
-	s.company = company
-}
-
-func (s *Resume) Display() {
-	fmt.Println(s.name, s.sex, s.age)
-	fmt.Println("经历：", s.timeArea, s.company)
-}
-
-func (s *Resume) Clone() *Resume {
+func (s *Computer) Clone() *Computer {
 	resume := *s
 	return &resume
+}
+
+func (s *Computer) BackUp() *Computer {
+	pc := new(Computer)
+	if err := deepCopy(pc, s); err != nil {
+		panic(err.Error())
+	}
+	return pc
+}
+
+func deepCopy(dst, src interface{}) error {
+	var buf bytes.Buffer
+	if err := gob.NewEncoder(&buf).Encode(src); err != nil {
+		return err
+	}
+	return gob.NewDecoder(bytes.NewBuffer(buf.Bytes())).Decode(dst)
 }
