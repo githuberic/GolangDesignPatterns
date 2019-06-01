@@ -1,15 +1,15 @@
 package main
 
 import (
+	"AdapterPattern"
 	"BuilderPattern"
 	"FactoryPattern"
-	"PrototypePattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	PrototypePattern.ComputerStart4()
+	testAdapterPattern()
 }
 
 func testSimplenessFactory() {
@@ -39,7 +39,16 @@ func testSingleton() {
 
 func testBuilderPattern() {
 	builder := new(BuilderPattern.ComputerBuilder)
-	director := BuilderPattern.Director {Builder: builder}
+	director := BuilderPattern.Director{Builder: builder}
 	computer := director.Create("I7", "32G", "4T")
 	fmt.Println(*computer)
+}
+
+func testAdapterPattern() {
+	audioPlayer := AdapterPattern.AudioPlayer{}
+
+	audioPlayer.Play("mp3", "beyond the horizon.mp3")
+	audioPlayer.Play("mp4", "alone.mp4")
+	audioPlayer.Play("vlc", "far far away.vlc")
+	audioPlayer.Play("avi", "mind me.avi")
 }
