@@ -5,13 +5,13 @@ import (
 	"Bridge"
 	"BuilderPattern"
 	"FactoryPattern"
+	"FilterPattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	fmt.Println("Start")
-	testBridge()
+	testFilterPattern()
 }
 
 func testSimplenessFactory() {
@@ -62,4 +62,26 @@ func testBridge() {
 	greenCircle.Circle(100, 100, 10, &Bridge.GreenCircle{})
 	redCircle.Draw()
 	greenCircle.Draw()
+}
+
+func testFilterPattern() {
+	var persons []FilterPattern.Person
+	persons = append(persons, FilterPattern.GetPerson("Robert", "Male", "Single"))
+	persons = append(persons, FilterPattern.GetPerson("John", "Male", "Married"))
+	persons = append(persons, FilterPattern.GetPerson("Laura", "Female", "Married"))
+	persons = append(persons, FilterPattern.GetPerson("Diana", "Female", "Single"))
+	persons = append(persons, FilterPattern.GetPerson("Mike", "Male", "Single"))
+	persons = append(persons, FilterPattern.GetPerson("Bobby", "Male", "Single"))
+	male := new(FilterPattern.CriteriaMale)
+	fmt.Println(male.MeetCriteria(persons))
+	female := new(FilterPattern.CriteriaFemale)
+	fmt.Println(female.MeetCriteria(persons))
+	single := new(FilterPattern.CriteriaSingle)
+	fmt.Println(single.MeetCriteria(persons))
+	singleMale := new(FilterPattern.AndCriteria)
+	singleMale.AndCriteria(single, male)
+	fmt.Println(singleMale.MeetCriteria(persons))
+	singleFemale := new(FilterPattern.AndCriteria)
+	singleFemale.AndCriteria(single, female)
+	fmt.Println(singleFemale.MeetCriteria(persons))
 }
