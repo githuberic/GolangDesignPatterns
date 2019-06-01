@@ -2,6 +2,7 @@ package main
 
 import (
 	"AdapterPattern"
+	"Bridge"
 	"BuilderPattern"
 	"FactoryPattern"
 	"SingletonPattern"
@@ -9,7 +10,8 @@ import (
 )
 
 func main() {
-	testAdapterPattern()
+	fmt.Println("Start")
+	testBridge()
 }
 
 func testSimplenessFactory() {
@@ -51,4 +53,13 @@ func testAdapterPattern() {
 	audioPlayer.Play("mp4", "alone.mp4")
 	audioPlayer.Play("vlc", "far far away.vlc")
 	audioPlayer.Play("avi", "mind me.avi")
+}
+
+func testBridge() {
+	redCircle := Bridge.Circle{}
+	redCircle.Circle(100, 100, 10, &Bridge.RedCircle{})
+	greenCircle := Bridge.Circle{}
+	greenCircle.Circle(100, 100, 10, &Bridge.GreenCircle{})
+	redCircle.Draw()
+	greenCircle.Draw()
 }
