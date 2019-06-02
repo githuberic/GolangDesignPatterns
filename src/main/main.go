@@ -4,6 +4,7 @@ import (
 	"AdapterPattern"
 	"Bridge"
 	"BuilderPattern"
+	"CompositePattern"
 	"FactoryPattern"
 	"FilterPattern"
 	"SingletonPattern"
@@ -11,7 +12,7 @@ import (
 )
 
 func main() {
-	testFilterPattern()
+	testCompositePattern()
 }
 
 func testSimplenessFactory() {
@@ -84,4 +85,35 @@ func testFilterPattern() {
 	singleFemale := new(FilterPattern.AndCriteria)
 	singleFemale.AndCriteria(single, female)
 	fmt.Println(singleFemale.MeetCriteria(persons))
+}
+
+func testCompositePattern() {
+	ceo := CompositePattern.GetEmployee("John", "CEO", 30000)
+
+	headSales := CompositePattern.GetEmployee("Robert", "Head Sales", 20000)
+	headMarketing := CompositePattern.GetEmployee("Michel", "Head Marketing", 20000)
+
+	ceo.Add(headSales)
+	ceo.Add(headMarketing)
+
+	salesExecutive1 := CompositePattern.GetEmployee("Richard", "Sales", 10000)
+	salesExecutive2 := CompositePattern.GetEmployee("Rob", "Sales", 10000)
+
+	headSales.Add(salesExecutive1)
+	headSales.Add(salesExecutive2)
+
+	clerk1 := CompositePattern.GetEmployee("Laura", "Marketing", 10000)
+	clerk2 := CompositePattern.GetEmployee("Bob", "Marketing", 10000)
+
+	headMarketing.Add(clerk1)
+	headMarketing.Add(clerk2)
+
+	ceo.PrintSubordinates()
+
+
+	ceo.Remove(headSales)
+	ceo.Remove(headMarketing)
+
+	ceo.PrintSubordinates()
+
 }
