@@ -5,6 +5,7 @@ import (
 	"Bridge"
 	"BuilderPattern"
 	"CompositePattern"
+	"DecoratorPattern"
 	"FactoryPattern"
 	"FilterPattern"
 	"SingletonPattern"
@@ -12,7 +13,7 @@ import (
 )
 
 func main() {
-	testCompositePattern()
+	testDecoratorPattern()
 }
 
 func testSimplenessFactory() {
@@ -110,10 +111,24 @@ func testCompositePattern() {
 
 	ceo.PrintSubordinates()
 
-
 	ceo.Remove(headSales)
 	ceo.Remove(headMarketing)
 
 	ceo.PrintSubordinates()
+}
 
+func testDecoratorPattern() {
+	circle := DecoratorPattern.Circle{}
+	redCircle := DecoratorPattern.RedShapeDecorator{}
+	redCircle.RedShapeDecorator(new(DecoratorPattern.Circle))
+
+	redRectangle := DecoratorPattern.RedShapeDecorator{}
+	redRectangle.RedShapeDecorator(new(DecoratorPattern.Rectangle))
+
+	fmt.Println("Circle with normal border")
+	circle.Draw1()
+	fmt.Println("Circle of red border")
+	redCircle.Draw1()
+	fmt.Println("Rectangle of red border")
+	redRectangle.Draw1()
 }
