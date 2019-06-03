@@ -157,8 +157,8 @@ func testFacadePattern() {
 //享元设计模式
 func testFlyweightPattern() {
 	flyweightPatternDemo := FlyweightPattern.FlyweightPatternDemo{}
+	shapeFactory := new(FlyweightPattern.ShapeFactory)
 	for i := 0; i < 20; i++ {
-		shapeFactory := new(FlyweightPattern.ShapeFactory)
 		circle := shapeFactory.GetCircle(flyweightPatternDemo.GetRandomColor())
 		circle.SetX(flyweightPatternDemo.GetRandomXAndY())
 		circle.SetY(flyweightPatternDemo.GetRandomXAndY())
