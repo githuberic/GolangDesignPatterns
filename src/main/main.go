@@ -9,12 +9,13 @@ import (
 	"FacadePattern"
 	"FactoryPattern"
 	"FilterPattern"
+	"FlyweightPattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	testFacadePattern()
+	testFlyweightPattern()
 }
 
 //简单工厂
@@ -151,4 +152,17 @@ func testFacadePattern() {
 	shapeMaker.DrawCircle()
 	shapeMaker.DrawRectangle()
 	shapeMaker.DrawSquare()
+}
+
+//享元设计模式
+func testFlyweightPattern() {
+	flyweightPatternDemo := FlyweightPattern.FlyweightPatternDemo{}
+	for i := 0; i < 20; i++ {
+		shapeFactory := new(FlyweightPattern.ShapeFactory)
+		circle := shapeFactory.GetCircle(flyweightPatternDemo.GetRandomColor())
+		circle.SetX(flyweightPatternDemo.GetRandomXAndY())
+		circle.SetY(flyweightPatternDemo.GetRandomXAndY())
+		circle.SetRadius(100)
+		circle.Draw3()
+	}
 }
