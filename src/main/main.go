@@ -10,12 +10,13 @@ import (
 	"FactoryPattern"
 	"FilterPattern"
 	"FlyweightPattern"
+	"ProxyPattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	testFlyweightPattern()
+	testProxyPattern()
 }
 
 //简单工厂
@@ -165,4 +166,12 @@ func testFlyweightPattern() {
 		circle.SetRadius(100)
 		circle.Draw3()
 	}
+}
+
+//代理设计模式
+func testProxyPattern() {
+	proxyImage := ProxyPattern.NewProxyImage("1.jpg")
+	proxyImage.Display()
+	fmt.Println("...")
+	proxyImage.Display()
 }
