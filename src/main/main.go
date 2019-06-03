@@ -17,6 +17,7 @@ func main() {
 	testFacadePattern()
 }
 
+//简单工厂
 func testSimplenessFactory() {
 	f := new(FactoryPattern.SimplenessFactory)
 	var s FactoryPattern.Shape
@@ -26,6 +27,7 @@ func testSimplenessFactory() {
 	}
 }
 
+//抽象工厂
 func testAbstractFactory() {
 	f := new(FactoryPattern.AbsFactory)
 	color := f.GetColor("Red")
@@ -34,6 +36,7 @@ func testAbstractFactory() {
 	shape.Draw()
 }
 
+//单例
 func testSingleton() {
 	s1 := SingletonPattern.GetInstance1()
 	s1.Count = 5
@@ -42,6 +45,7 @@ func testSingleton() {
 	fmt.Println(s2)
 }
 
+//建造者
 func testBuilderPattern() {
 	builder := new(BuilderPattern.ComputerBuilder)
 	director := BuilderPattern.Director{Builder: builder}
@@ -49,6 +53,7 @@ func testBuilderPattern() {
 	fmt.Println(*computer)
 }
 
+//适配器
 func testAdapterPattern() {
 	audioPlayer := AdapterPattern.AudioPlayer{}
 
@@ -58,6 +63,7 @@ func testAdapterPattern() {
 	audioPlayer.Play("avi", "mind me.avi")
 }
 
+//桥接
 func testBridge() {
 	redCircle := Bridge.Circle{}
 	redCircle.Circle(100, 100, 10, &Bridge.RedCircle{})
@@ -67,6 +73,7 @@ func testBridge() {
 	greenCircle.Draw()
 }
 
+//过滤器
 func testFilterPattern() {
 	var persons []FilterPattern.Person
 	persons = append(persons, FilterPattern.GetPerson("Robert", "Male", "Single"))
@@ -89,6 +96,7 @@ func testFilterPattern() {
 	fmt.Println(singleFemale.MeetCriteria(persons))
 }
 
+//组合模式
 func testCompositePattern() {
 	ceo := CompositePattern.GetEmployee("John", "CEO", 30000)
 
@@ -118,6 +126,7 @@ func testCompositePattern() {
 	ceo.PrintSubordinates()
 }
 
+//装饰器
 func testDecoratorPattern() {
 	circle := DecoratorPattern.Circle{}
 	redCircle := DecoratorPattern.RedShapeDecorator{}
@@ -134,6 +143,7 @@ func testDecoratorPattern() {
 	redRectangle.Draw1()
 }
 
+//外观
 func testFacadePattern() {
 	shapeMaker := new(FacadePattern.ShapeMaker)
 	shapeMaker.ShapeMaker()
