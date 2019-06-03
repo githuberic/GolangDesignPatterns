@@ -6,6 +6,7 @@ import (
 	"BuilderPattern"
 	"CompositePattern"
 	"DecoratorPattern"
+	"FacadePattern"
 	"FactoryPattern"
 	"FilterPattern"
 	"SingletonPattern"
@@ -13,7 +14,7 @@ import (
 )
 
 func main() {
-	testDecoratorPattern()
+	testFacadePattern()
 }
 
 func testSimplenessFactory() {
@@ -131,4 +132,13 @@ func testDecoratorPattern() {
 	redCircle.Draw1()
 	fmt.Println("Rectangle of red border")
 	redRectangle.Draw1()
+}
+
+func testFacadePattern() {
+	shapeMaker := new(FacadePattern.ShapeMaker)
+	shapeMaker.ShapeMaker()
+
+	shapeMaker.DrawCircle()
+	shapeMaker.DrawRectangle()
+	shapeMaker.DrawSquare()
 }
