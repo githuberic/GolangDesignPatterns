@@ -4,6 +4,7 @@ import (
 	"AdapterPattern"
 	"Bridge"
 	"BuilderPattern"
+	"ChainofResponsibilityPattern"
 	"CompositePattern"
 	"DecoratorPattern"
 	"FacadePattern"
@@ -16,7 +17,7 @@ import (
 )
 
 func main() {
-	testProxyPattern()
+	testChainofResponsibilityPattern()
 }
 
 //简单工厂
@@ -174,4 +175,15 @@ func testProxyPattern() {
 	proxyImage.Display()
 	fmt.Println("...")
 	proxyImage.Display()
+}
+
+func testChainofResponsibilityPattern() {
+	logger := ChainofResponsibilityPattern.TestChainofResponsibilityPattern()
+
+	logger.LogMessage(ChainofResponsibilityPattern.INFO,"This is an information.",nil)
+
+	logger.LogMessage(ChainofResponsibilityPattern.DEBUG,"This is a debug level information.",nil)
+
+	logger.LogMessage(ChainofResponsibilityPattern.ERROR,"This is an error information.",nil)
+
 }
