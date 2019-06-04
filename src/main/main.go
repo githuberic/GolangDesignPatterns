@@ -5,6 +5,7 @@ import (
 	"Bridge"
 	"BuilderPattern"
 	"ChainofResponsibilityPattern"
+	"CommandPattern"
 	"CompositePattern"
 	"DecoratorPattern"
 	"FacadePattern"
@@ -17,7 +18,7 @@ import (
 )
 
 func main() {
-	testChainofResponsibilityPattern()
+	testCommandPattern()
 }
 
 //简单工厂
@@ -177,13 +178,29 @@ func testProxyPattern() {
 	proxyImage.Display()
 }
 
+//责任链模式
 func testChainofResponsibilityPattern() {
 	logger := ChainofResponsibilityPattern.TestChainofResponsibilityPattern()
 
-	logger.LogMessage(ChainofResponsibilityPattern.INFO,"This is an information.",nil)
+	logger.LogMessage(ChainofResponsibilityPattern.INFO, "This is an information.", nil)
 
-	logger.LogMessage(ChainofResponsibilityPattern.DEBUG,"This is a debug level information.",nil)
+	logger.LogMessage(ChainofResponsibilityPattern.DEBUG, "This is a debug level information.", nil)
 
-	logger.LogMessage(ChainofResponsibilityPattern.ERROR,"This is an error information.",nil)
+	logger.LogMessage(ChainofResponsibilityPattern.ERROR, "This is an error information.", nil)
+}
 
+func testCommandPattern() {
+	abcStock := CommandPattern.NewStock()
+
+	buyStockOrder := new(CommandPattern.BuyStock)
+	buyStockOrder.BuyStock(abcStock)
+
+	sellStockOrder := new(CommandPattern.SellStock)
+	sellStockOrder.SellStock(abcStock)
+
+	broker := new(CommandPattern.Broker)
+	broker.TakeOrder(buyStockOrder)
+	broker.TakeOrder(sellStockOrder)
+
+	broker.PlaceOrders()
 }
