@@ -13,13 +13,14 @@ import (
 	"FilterPattern"
 	"FlyweightPattern"
 	"InterpreterPattern"
+	"IteratorPattern"
 	"ProxyPattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	testInterpreterPattern()
+	testIteratorPattern()
 }
 
 //简单工厂
@@ -208,9 +209,16 @@ func testCommandPattern() {
 }
 
 //解释器模式
-func testInterpreterPattern(){
-	isMale:=InterpreterPattern.GetMaleExpression()
-	isMarriedWoman:=InterpreterPattern.GetMarriedWomanExpression()
-	fmt.Println("John is male? " , isMale.Interpret("John"))
-	fmt.Println("Julie is a married women? " , isMarriedWoman.Interpret("Married Julie"))
+func testInterpreterPattern() {
+	isMale := InterpreterPattern.GetMaleExpression()
+	isMarriedWoman := InterpreterPattern.GetMarriedWomanExpression()
+	fmt.Println("John is male? ", isMale.Interpret("John"))
+	fmt.Println("Julie is a married women? ", isMarriedWoman.Interpret("Married Julie"))
+}
+
+func testIteratorPattern() {
+	namesRepository := new(IteratorPattern.NameRepository)
+	for iter := namesRepository.GetIterator(); iter.HasNext(); {
+		fmt.Println(iter.Next())
+	}
 }
