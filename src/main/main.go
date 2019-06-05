@@ -12,13 +12,14 @@ import (
 	"FactoryPattern"
 	"FilterPattern"
 	"FlyweightPattern"
+	"InterpreterPattern"
 	"ProxyPattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	testCommandPattern()
+	testInterpreterPattern()
 }
 
 //简单工厂
@@ -189,6 +190,7 @@ func testChainofResponsibilityPattern() {
 	logger.LogMessage(ChainofResponsibilityPattern.ERROR, "This is an error information.", nil)
 }
 
+//命令模式
 func testCommandPattern() {
 	abcStock := CommandPattern.NewStock()
 
@@ -203,4 +205,12 @@ func testCommandPattern() {
 	broker.TakeOrder(sellStockOrder)
 
 	broker.PlaceOrders()
+}
+
+//解释器模式
+func testInterpreterPattern(){
+	isMale:=InterpreterPattern.GetMaleExpression()
+	isMarriedWoman:=InterpreterPattern.GetMarriedWomanExpression()
+	fmt.Println("John is male? " , isMale.Interpret("John"))
+	fmt.Println("Julie is a married women? " , isMarriedWoman.Interpret("Married Julie"))
 }
