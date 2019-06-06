@@ -14,13 +14,14 @@ import (
 	"FlyweightPattern"
 	"InterpreterPattern"
 	"IteratorPattern"
+	"MediatorPattern"
 	"ProxyPattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	testIteratorPattern()
+	testMediatorPattern()
 }
 
 //简单工厂
@@ -216,9 +217,22 @@ func testInterpreterPattern() {
 	fmt.Println("Julie is a married women? ", isMarriedWoman.Interpret("Married Julie"))
 }
 
+//迭代模式
 func testIteratorPattern() {
 	namesRepository := new(IteratorPattern.NameRepository)
 	for iter := namesRepository.GetIterator(); iter.HasNext(); {
 		fmt.Println(iter.Next())
 	}
+}
+
+//中介者模式
+func testMediatorPattern() {
+	robert := new(MediatorPattern.User)
+	robert.User("Robert")
+
+	john := new(MediatorPattern.User)
+	john.User("John")
+
+	robert.SendMessage("Hi John")
+	john.SendMessage("Hi Robert")
 }
