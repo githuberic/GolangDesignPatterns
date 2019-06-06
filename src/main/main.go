@@ -15,13 +15,14 @@ import (
 	"InterpreterPattern"
 	"IteratorPattern"
 	"MediatorPattern"
+	"MementoPattern"
 	"ProxyPattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	testMediatorPattern()
+	testMementoPattern()
 }
 
 //简单工厂
@@ -235,4 +236,22 @@ func testMediatorPattern() {
 
 	robert.SendMessage("Hi John")
 	john.SendMessage("Hi Robert")
+}
+
+//备忘录模式
+func testMementoPattern() {
+	originator := new(MementoPattern.Originator)
+	careTaker := new(MementoPattern.CareTaker)
+	originator.SetState("State #1")
+	originator.SetState("State #2")
+	careTaker.Add(originator.SaveStateToMemento())
+	originator.SetState("State #3")
+	careTaker.Add(originator.SaveStateToMemento())
+	originator.SetState("State #4")
+
+	fmt.Println("Current State: " + originator.GetState())
+	originator.GetStateFromMemento(careTaker.Get(0))
+	fmt.Println("First saved State: " + originator.GetState())
+	originator.GetStateFromMemento(careTaker.Get(1))
+	fmt.Println("Second saved State: " + originator.GetState())
 }
