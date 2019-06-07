@@ -16,13 +16,14 @@ import (
 	"IteratorPattern"
 	"MediatorPattern"
 	"MementoPattern"
+	"ObserverPattern"
 	"ProxyPattern"
 	"SingletonPattern"
 	"fmt"
 )
 
 func main() {
-	testMementoPattern()
+	testObserverPattern()
 }
 
 //简单工厂
@@ -254,4 +255,16 @@ func testMementoPattern() {
 	fmt.Println("First saved State: " + originator.GetState())
 	originator.GetStateFromMemento(careTaker.Get(1))
 	fmt.Println("Second saved State: " + originator.GetState())
+}
+
+//观察者模式
+func testObserverPattern() {
+	subject := new(ObserverPattern.Subject)
+	new(ObserverPattern.HexaObserver).HexaObserver(subject)
+	new(ObserverPattern.OctalObserver).OctalObserver(subject)
+	new(ObserverPattern.BinaryObserver).BinaryObserver(subject)
+	fmt.Println("First state change:15")
+	subject.SetState(15)
+	fmt.Println("Second state change:10")
+	subject.SetState(10)
 }
