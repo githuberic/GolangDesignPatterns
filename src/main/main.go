@@ -19,11 +19,12 @@ import (
 	"ObserverPattern"
 	"ProxyPattern"
 	"SingletonPattern"
+	"StatePattern"
 	"fmt"
 )
 
 func main() {
-	testObserverPattern()
+	testStatePattern()
 }
 
 //简单工厂
@@ -267,4 +268,18 @@ func testObserverPattern() {
 	subject.SetState(15)
 	fmt.Println("Second state change:10")
 	subject.SetState(10)
+}
+
+//状态模式
+func testStatePattern()  {
+	context:=new(StatePattern.Context)
+
+	startState:=new(StatePattern.StartState)
+	startState.DoAction(context)
+	fmt.Println(context.GetState().ToString())
+
+	stopState:=new(StatePattern.StopState)
+	stopState.DoAction(context)
+
+	fmt.Println(context.GetState().ToString())
 }
