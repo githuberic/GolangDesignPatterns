@@ -22,11 +22,12 @@ import (
 	"SingletonPattern"
 	"StatePattern"
 	"StrategyPattern"
+	"TemplatePattern"
 	"fmt"
 )
 
 func main() {
-	testStrategyPattern()
+	testTemplatePattern()
 }
 
 //简单工厂
@@ -286,6 +287,7 @@ func testStatePattern() {
 	fmt.Println(context.GetState().ToString())
 }
 
+//空对象模式
 func testNullObjectPattern() {
 	customerFactory := new(NullObjectPattern.CustomerFactory)
 	customerFactory.Names = []string{"Rob", "Joe", "Julie"}
@@ -301,6 +303,7 @@ func testNullObjectPattern() {
 	fmt.Println(customer4.GetName())
 }
 
+//策略模式
 func testStrategyPattern() {
 	context := new(StrategyPattern.Context).Context(new(StrategyPattern.OperationAdd))
 	fmt.Println("10+5:", context.ExecuteStrategy(10, 5))
@@ -310,4 +313,13 @@ func testStrategyPattern() {
 
 	context.Context(new(StrategyPattern.OperationMultiply))
 	fmt.Println("10*5:", context.ExecuteStrategy(10, 5))
+}
+
+//模版模式
+func testTemplatePattern() {
+	cricket := new(TemplatePattern.Cricket)
+	cricket.Play()
+
+	football := new(TemplatePattern.Football)
+	football.Play()
 }
