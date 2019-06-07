@@ -21,11 +21,12 @@ import (
 	"ProxyPattern"
 	"SingletonPattern"
 	"StatePattern"
+	"StrategyPattern"
 	"fmt"
 )
 
 func main() {
-	testNullObjectPattern()
+	testStrategyPattern()
 }
 
 //简单工厂
@@ -298,4 +299,15 @@ func testNullObjectPattern() {
 	fmt.Println(customer2.GetName())
 	fmt.Println(customer3.GetName())
 	fmt.Println(customer4.GetName())
+}
+
+func testStrategyPattern() {
+	context := new(StrategyPattern.Context).Context(new(StrategyPattern.OperationAdd))
+	fmt.Println("10+5:", context.ExecuteStrategy(10, 5))
+
+	context.Context(new(StrategyPattern.OperationSubstract))
+	fmt.Println("10-5:", context.ExecuteStrategy(10, 5))
+
+	context.Context(new(StrategyPattern.OperationMultiply))
+	fmt.Println("10*5:", context.ExecuteStrategy(10, 5))
 }
