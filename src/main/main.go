@@ -23,11 +23,12 @@ import (
 	"StatePattern"
 	"StrategyPattern"
 	"TemplatePattern"
+	"VisitorPattern"
 	"fmt"
 )
 
 func main() {
-	testTemplatePattern()
+	testVisitorPattern()
 }
 
 //简单工厂
@@ -322,4 +323,10 @@ func testTemplatePattern() {
 
 	football := new(TemplatePattern.Football)
 	football.Play()
+}
+
+//访问者模式
+func testVisitorPattern() {
+	computer := new(VisitorPattern.Computer).Computer()
+	computer.Accept(new(VisitorPattern.ComputerPartDisplayVisitor))
 }
