@@ -16,6 +16,7 @@ import (
 	"IteratorPattern"
 	"MediatorPattern"
 	"MementoPattern"
+	"NullObjectPattern"
 	"ObserverPattern"
 	"ProxyPattern"
 	"SingletonPattern"
@@ -24,7 +25,7 @@ import (
 )
 
 func main() {
-	testStatePattern()
+	testNullObjectPattern()
 }
 
 //简单工厂
@@ -271,15 +272,30 @@ func testObserverPattern() {
 }
 
 //状态模式
-func testStatePattern()  {
-	context:=new(StatePattern.Context)
+func testStatePattern() {
+	context := new(StatePattern.Context)
 
-	startState:=new(StatePattern.StartState)
+	startState := new(StatePattern.StartState)
 	startState.DoAction(context)
 	fmt.Println(context.GetState().ToString())
 
-	stopState:=new(StatePattern.StopState)
+	stopState := new(StatePattern.StopState)
 	stopState.DoAction(context)
 
 	fmt.Println(context.GetState().ToString())
+}
+
+func testNullObjectPattern() {
+	customerFactory := new(NullObjectPattern.CustomerFactory)
+	customerFactory.Names = []string{"Rob", "Joe", "Julie"}
+
+	customer1 := customerFactory.GetCustomer("Rob")
+	customer2 := customerFactory.GetCustomer("Bob")
+	customer3 := customerFactory.GetCustomer("Julie")
+	customer4 := customerFactory.GetCustomer("Laura")
+
+	fmt.Println(customer1.GetName())
+	fmt.Println(customer2.GetName())
+	fmt.Println(customer3.GetName())
+	fmt.Println(customer4.GetName())
 }
